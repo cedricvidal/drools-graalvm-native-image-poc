@@ -69,6 +69,22 @@
                     </transformers>
                     <shadedArtifactAttached>true</shadedArtifactAttached>
                     <shadedClassifierName>shaded</shadedClassifierName>
+                    <artifactSet>
+                        <excludes>
+                            <exclude>org.kie.soup:kie-soup-maven-support</exclude>
+                            <exclude>org.mvel:*</exclude>
+                            <exclude>org.antlr:*</exclude>
+                            <exclude>org.eclipse.jdt.core.compiler:*</exclude>
+                            <exclude>com.thoughtworks.xstream:xstream:*</exclude>
+                            <exclude>xmlpull:*</exclude>
+                            <exclude>xpp3:*</exclude>
+                            <exclude>com.google.protobuf:protobuf-java:*</exclude>
+                            <exclude>commons-logging:*</exclude>
+                            <exclude>commons-io:*</exclude>
+                            <exclude>commons-codec:*</exclude>
+                            <exclude>junit:*</exclude>
+                        </excludes>
+                    </artifactSet>
                 </configuration>
                 <executions>
                     <execution>
@@ -112,28 +128,30 @@
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-compiler</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.drools</groupId>
-            <artifactId>drools-decisiontables</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.drools</groupId>
-            <artifactId>drools-templates</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.thoughtworks.xstream</groupId>
+                    <artifactId>xstream</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-internal</artifactId>
-        </dependency>
-
-        <!-- Needed for logging -->
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
         </dependency>
 
         <!-- Logging -->
@@ -147,31 +165,6 @@
             <artifactId>mvel2</artifactId>
         </dependency>
 
-        <!-- Examples only dependencies. -->
-        <!--
-          WARNING: every examples only dependency must be properly dealt with in
-          drools-distribution/src/main/assembly/assembly-drools.xml
-        -->
-        <dependency>
-            <groupId>com.miglayout</groupId>
-            <artifactId>miglayout</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-        <dependency><!-- For example app logging: configure in src/java/resources/logback.xml -->
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
